@@ -1,0 +1,31 @@
+# Optional. Runs RedNarrate's web UI alongside a local Ollama for offline LLM.
+# For the cloud (Anthropic) path you don't need this — just `rednarrate serve`.
+services:
+  rednarrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      REDNARRATE_LLM_PROVIDER: ${REDNARRATE_LLM_PROVIDER:-anthropic}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      REDNARRATE_OLLAMA_BASE_URL: http://ollama:11434
+    volumes:
+      - ./output:/app/output
+      - ./chroma_db:/app/chroma_db
+      - rednarrate-db:/app/data
+    depends_on:
+      - ollama
+    command: rednarrate serve --host 0.0.0.0 --port 8000
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+
+volumes:
+  rednarrate-db:
+  ollama-models:

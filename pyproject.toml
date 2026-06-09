@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rednarrate"
+version = "0.1.0"
+description = "AI-powered pentest evidence triage and VAPT report generation"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "RedNarrate" }]
+
+dependencies = [
+    "langgraph>=1.0",
+    "langgraph-checkpoint-sqlite",
+    "langchain-core>=1.0",
+    "langchain-anthropic>=0.3",
+    "anthropic>=0.39",
+    "langchain-ollama>=0.2",
+    "langchain-chroma>=0.1",
+    "langchain-huggingface>=0.0.3",
+    "langchain-text-splitters>=0.3",
+    "chromadb>=0.5",
+    "sentence-transformers>=3.0",
+    "python-libnmap~=0.7",
+    "defusedxml~=0.7",
+    "cvss~=3.0",
+    "weasyprint>=62.0",
+    "jinja2~=3.1",
+    "pydantic~=2.0",
+    "pydantic-settings~=2.0",
+    "python-dotenv~=1.0",
+    "fastapi>=0.115",
+    "uvicorn>=0.30",
+    "python-multipart>=0.0.9",
+    "typer>=0.12",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest~=8.0",
+    "pytest-cov~=5.0",
+    "pymupdf~=1.24",
+]
+
+[project.scripts]
+rednarrate = "rednarrate.cli.main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+rednarrate = ["templates/*.j2", "templates/*.css", "templates/partials/*.j2", "db/*.sql", "api/templates/*.html", "api/static/*.css"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

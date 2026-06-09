@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# RedNarrate runtime
+chroma_db/
+*.db
+*.db-wal
+*.db-shm
+output/
+uploads/
+.env
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Claude Code local settings
+.claude/
+
+# Downloaded knowledge corpus (fetched by script, not committed)
+knowledge/wstg/
+knowledge/ptes/
+knowledge/sample_reports/
