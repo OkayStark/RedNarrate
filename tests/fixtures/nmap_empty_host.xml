@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<nmaprun scanner="nmap" args="nmap -sV -oX scan.xml 10.0.0.9" start="1717200000" version="7.94" xmloutputversion="1.05">
+  <scaninfo type="syn" protocol="tcp" numservices="1000" services="1-1000"/>
+  <host starttime="1717200000" endtime="1717200010">
+    <status state="down" reason="no-response" reason_ttl="0"/>
+    <address addr="10.0.0.9" addrtype="ipv4"/>
+  </host>
+  <runstats>
+    <finished time="1717200010" elapsed="10" summary="Nmap done: 1 IP address (0 hosts up) scanned" exit="success"/>
+    <hosts up="0" down="1" total="1"/>
+  </runstats>
+</nmaprun>

