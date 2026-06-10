@@ -1,0 +1,11 @@
+        ___
+       __H__
+ ___ ___[)]_____ ___ ___  {1.8.5}
+
+[11:02:10] [INFO] starting @ 11:02:10 /2026-05-31/
+[11:02:10] [INFO] testing connection to the target URL 'http://target.com/contact'
+[11:02:11] [INFO] testing if the target URL content is stable
+[11:02:12] [INFO] testing for SQL injection on GET parameter 'id'
+[11:02:30] [WARNING] GET parameter 'id' does not seem to be injectable
+[11:02:30] [CRITICAL] all tested parameters do not appear to be injectable.
+[11:02:30] [INFO] ending @ 11:02:30 /2026-05-31/
