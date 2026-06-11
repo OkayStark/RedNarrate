@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Scan {{ scan.id[:8] }} — RedNarrate</title>
+  <link rel="stylesheet" href="/static/ui.css">
+  {% if scan.status not in ["complete", "failed"] %}
+  <meta http-equiv="refresh" content="4">
+  {% endif %}
+</head>
+<body>
+  <header><h1><a href="/">RedNarrate</a></h1></header>
+  <main>
+    <section class="card">
+      <h2>Scan {{ scan.id[:8] }} — {{ scan.client_name }}</h2>
+      <p>Status: <span class="status {{ scan.status }}">{{ scan.status }}</span>
+         {% if scan.status not in ["complete","failed"] %}
+         <span class="muted">(auto-refreshing…)</span>{% endif %}</p>
+      {% if scan.error_summary %}<p class="error">{{ scan.error_summary }}</p>{% endif %}
+
+      {% if reports %}
+      <p><strong>Download:</strong>
+        {% for r in reports %}
+          <a class="btn" href="/scans/{{ scan.id }}/report?fmt={{ r.format }}">{{ r.format|upper }}</a>
+        {% endfor %}
+      </p>
+      {% endif %}
+    </section>
+
+    {% if findings %}
+    <section class="card">
+      <h2>Findings ({{ findings|length }})</h2>
+      <table>
+        <thead><tr><th>ID</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Asset</th></tr></thead>
+        <tbody>
+        {% for f in findings %}
+          <tr>
+            <td>{{ f.id }}</td><td>{{ f.name }}</td>
+            <td><span class="status {{ f.severity }}">{{ f.severity }}</span></td>
+            <td>{{ "%.1f"|format(f.cvss_score) if f.cvss_score is not none else "—" }}</td>
+            <td>{{ f.host }}{% if f.port %}:{{ f.port }}{% endif %}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </section>
+    {% endif %}
+  </main>
+</body>
+</html>

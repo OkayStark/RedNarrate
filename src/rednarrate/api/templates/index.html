@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>RedNarrate</title>
+  <link rel="stylesheet" href="/static/ui.css">
+</head>
+<body>
+  <header><h1>RedNarrate</h1>
+    <p class="tag">Pentest evidence in &rarr; client-ready report out</p></header>
+
+  <main>
+    <section class="card">
+      <h2>New scan</h2>
+      <form action="/scans" method="post" enctype="multipart/form-data">
+        <label>Client name
+          <input type="text" name="client" value="Client" required></label>
+        <label>Scope
+          <input type="text" name="scope" placeholder="External web application"></label>
+        <label>Engagement dates
+          <input type="text" name="dates" placeholder="2026-06-01 to 2026-06-05"></label>
+        <label>Evidence files (nmap XML, Burp XML, sqlmap log)
+          <input type="file" name="files" multiple required></label>
+        <button type="submit">Generate report</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Recent scans</h2>
+      {% if scans %}
+      <table>
+        <thead><tr><th>ID</th><th>Client</th><th>Status</th><th>Created</th></tr></thead>
+        <tbody>
+        {% for s in scans %}
+          <tr>
+            <td><a href="/scans/{{ s.id }}">{{ s.id[:8] }}</a></td>
+            <td>{{ s.client_name }}</td>
+            <td><span class="status {{ s.status }}">{{ s.status }}</span></td>
+            <td>{{ s.created_at }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}<p class="muted">No scans yet.</p>{% endif %}
+    </section>
+  </main>
+</body>
+</html>
