@@ -1,0 +1,25 @@
+<h2>Executive Summary</h2>
+<p>{{ exec.overview }}</p>
+
+<p><strong>Overall Risk Rating:</strong>
+   <span class="badge {{ exec.overall_risk }}">{{ exec.overall_risk }}</span></p>
+
+{% if severity_counts %}
+<div class="sev-bar">
+  {% for band in ["Critical","High","Medium","Low","Informational"] %}
+    {% if severity_counts.get(band) %}
+      <span class="sev-cell {{ band }}">{{ severity_counts.get(band) }} {{ band }}</span>
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if exec.key_findings %}
+<h3>Key Findings</h3>
+<ul>{% for k in exec.key_findings %}<li>{{ k }}</li>{% endfor %}</ul>
+{% endif %}
+
+{% if exec.immediate_actions %}
+<h3>Immediate Action Items</h3>
+<ul>{% for a in exec.immediate_actions %}<li>{{ a }}</li>{% endfor %}</ul>
+{% endif %}

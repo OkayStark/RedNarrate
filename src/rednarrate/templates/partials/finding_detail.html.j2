@@ -1,0 +1,42 @@
+<section class="finding {{ f.break_class }}" id="{{ f.id }}">
+  <div class="finding-header">
+    <h3>{{ f.id }} — {{ f.name }}
+        <span class="badge {{ f.severity }}">{{ f.severity }}</span></h3>
+    <p class="asset-line">
+      <strong>CVSS {{ "%.1f"|format(f.cvss_score) if f.cvss_score is not none else "—" }}:</strong>
+      <span class="cvss-vector">{{ f.cvss_vector or "—" }}</span>
+      {% if f.score_disputed %}<span class="muted"> (score flagged for review)</span>{% endif %}
+    </p>
+    <p class="asset-line">
+      <strong>Asset:</strong> {{ f.host }}{% if f.port %}:{{ f.port }}{% endif %}
+      {% if f.url %} · {{ f.url }}{% endif %}
+      {% if f.parameter %} · parameter: <code>{{ f.parameter }}</code>{% endif %}
+      · source: {{ f.source_tool }}
+    </p>
+  </div>
+
+  <p><strong>Description.</strong> {{ f.description or f.description_raw }}</p>
+  {% if f.business_impact %}
+  <p><strong>Business Impact.</strong> {{ f.business_impact }}</p>
+  {% endif %}
+
+  {% if f.evidence_display %}
+  <p><strong>Evidence.</strong></p>
+  <pre class="evidence">{{ f.evidence_display }}</pre>
+  {% endif %}
+
+  {% if f.remediation %}
+  <p><strong>Remediation.</strong></p>
+  <ul class="remediation">
+    {% for step in f.remediation %}<li>{{ step }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  {% set refs = f.report_references or f.refs or f.references %}
+  {% if refs %}
+  <p class="asset-line"><strong>References:</strong> {{ refs | join(", ") }}</p>
+  {% endif %}
+  {% if f.host_port_ref %}
+  <p class="asset-line muted">See also: {{ f.host_port_ref }}</p>
+  {% endif %}
+</section>

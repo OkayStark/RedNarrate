@@ -1,0 +1,9 @@
+<h2>Attack Chains</h2>
+<p class="muted">Individual findings that combine to amplify risk.</p>
+{% for c in chains %}
+  <section class="finding">
+    <h3>{{ loop.index }}. {{ c.name or c.chain_name }}</h3>
+    <p class="chain-flow">{{ c.finding_ids | join("  →  ") }}</p>
+    <p>{{ c.combined_impact }}</p>
+  </section>
+{% endfor %}

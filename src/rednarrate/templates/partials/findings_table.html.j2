@@ -1,0 +1,19 @@
+<h2>Findings Summary</h2>
+<table>
+  <thead>
+    <tr><th>ID</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Affected Asset</th></tr>
+  </thead>
+  <tbody>
+  {% for f in findings %}
+    <tr>
+      <td>{{ f.id }}</td>
+      <td>{{ f.name }}{% if f.instances and f.instances > 1 %}
+            <span class="muted">(×{{ f.instances }})</span>{% endif %}</td>
+      <td><span class="badge {{ f.severity }}">{{ f.severity }}</span></td>
+      <td>{{ "%.1f"|format(f.cvss_score) if f.cvss_score is not none else "—" }}</td>
+      <td>{{ f.host }}{% if f.port %}:{{ f.port }}{% endif %}
+          {% if f.parameter %}<br><span class="muted">param: {{ f.parameter }}</span>{% endif %}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>

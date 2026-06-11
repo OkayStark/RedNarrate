@@ -1,0 +1,126 @@
+# {{ meta.report_title }} — {{ meta.client_name }}
+
+> **{{ meta.classification }}** · {{ meta.report_date }} · v{{ meta.version }}
+
+---
+
+## Executive Summary
+
+{{ exec.overview }}
+
+**Overall Risk Rating: {{ exec.overall_risk }}**
+
+{% if severity_counts %}
+Severity breakdown: {% for band in ["Critical","High","Medium","Low","Informational"] %}{% if severity_counts.get(band) %}{{ severity_counts.get(band) }} {{ band }}{% if not loop.last %} · {% endif %}{% endif %}{% endfor %}
+{% endif %}
+
+{% if exec.key_findings %}
+### Key Findings
+{% for k in exec.key_findings %}
+- {{ k }}
+{% endfor %}
+{% endif %}
+
+{% if exec.immediate_actions %}
+### Immediate Action Items
+{% for a in exec.immediate_actions %}
+- {{ a }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Scope & Methodology
+
+- **Scope:** {{ meta.scope }}
+- **Testing window:** {{ meta.engagement_dates }}
+- **Standards:** {{ methodology.standards | join(", ") if methodology.standards else "OWASP WSTG, PTES, NIST SP 800-115" }}
+- **Tools used:** {{ methodology.tools_used | join(", ") if methodology.tools_used else "nmap, Burp Suite, SQLMap" }}
+
+---
+
+## Findings Summary
+
+| ID | Finding | Severity | CVSS | Affected Asset |
+|---|---|---|---|---|
+{% for f in findings %}| {{ f.id }} | {{ f.name }}{% if f.instances and f.instances > 1 %} (×{{ f.instances }}){% endif %} | {{ f.severity }} | {{ "%.1f"|format(f.cvss_score) if f.cvss_score is not none else "—" }} | {{ f.host }}{% if f.port %}:{{ f.port }}{% endif %} |
+{% endfor %}
+
+{% if chains %}
+---
+
+## Attack Chains
+
+{% for c in chains %}
+### {{ loop.index }}. {{ c.name or c.chain_name }}
+
+`{{ c.finding_ids | join("  ->  ") }}`
+
+{{ c.combined_impact }}
+{% endfor %}
+{% endif %}
+
+---
+
+## Detailed Findings
+
+{% for f in findings %}
+### {{ f.id }} — {{ f.name }} [{{ f.severity }} | CVSS {{ "%.1f"|format(f.cvss_score) if f.cvss_score is not none else "—" }}]
+
+**CVSS Vector:** `{{ f.cvss_vector or "—" }}`{% if f.score_disputed %} _(flagged for review)_{% endif %}
+
+**Asset:** {{ f.host }}{% if f.port %}:{{ f.port }}{% endif %}{% if f.url %} · {{ f.url }}{% endif %}{% if f.parameter %} · parameter: `{{ f.parameter }}`{% endif %} · source: {{ f.source_tool }}
+
+**Description.** {{ f.description or f.description_raw }}
+
+{% if f.business_impact %}**Business Impact.** {{ f.business_impact }}
+{% endif %}
+{% if f.evidence_display %}
+**Evidence.**
+
+```
+{{ f.evidence_display }}
+```
+{% endif %}
+{% if f.remediation %}
+**Remediation.**
+{% for step in f.remediation %}
+- {{ step }}
+{% endfor %}
+{% endif %}
+{% set refs = f.report_references or f.refs or f.references %}
+{% if refs %}**References:** {{ refs | join(", ") }}
+{% endif %}
+
+{% endfor %}
+
+---
+
+## Remediation Roadmap
+
+### Immediate (0–7 days) — Critical & High
+{% if roadmap.immediate %}{% for r in roadmap.immediate %}
+- {{ r }}
+{% endfor %}{% else %}_None._
+{% endif %}
+
+### Short-term (1 month) — Medium
+{% if roadmap.short_term %}{% for r in roadmap.short_term %}
+- {{ r }}
+{% endfor %}{% else %}_None._
+{% endif %}
+
+### Long-term (1 quarter) — Low & Informational
+{% if roadmap.long_term %}{% for r in roadmap.long_term %}
+- {{ r }}
+{% endfor %}{% else %}_None._
+{% endif %}
+
+{% if warnings %}
+---
+
+## Appendix — Processing Notes
+{% for w in warnings %}
+- {{ w }}
+{% endfor %}
+{% endif %}

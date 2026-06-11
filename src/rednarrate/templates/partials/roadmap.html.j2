@@ -1,0 +1,16 @@
+<h2>Remediation Roadmap</h2>
+
+<h3>Immediate (0–7 days) — Critical &amp; High</h3>
+{% if roadmap.immediate %}
+<ul>{% for r in roadmap.immediate %}<li>{{ r }}</li>{% endfor %}</ul>
+{% else %}<p class="muted">No critical or high-severity findings.</p>{% endif %}
+
+<h3>Short-term (within 1 month) — Medium</h3>
+{% if roadmap.short_term %}
+<ul>{% for r in roadmap.short_term %}<li>{{ r }}</li>{% endfor %}</ul>
+{% else %}<p class="muted">No medium-severity findings.</p>{% endif %}
+
+<h3>Long-term (within 1 quarter) — Low &amp; Informational</h3>
+{% if roadmap.long_term %}
+<ul>{% for r in roadmap.long_term %}<li>{{ r }}</li>{% endfor %}</ul>
+{% else %}<p class="muted">No low-severity or informational findings.</p>{% endif %}

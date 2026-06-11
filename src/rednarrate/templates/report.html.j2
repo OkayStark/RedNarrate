@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ meta.report_title }} — {{ meta.client_name }}</title>
+  <style>{% include "styles.css" %}</style>
+</head>
+<body>
+
+{% include "partials/cover.html.j2" %}
+
+<section class="exec-summary">
+  {% include "partials/exec_summary.html.j2" %}
+</section>
+
+<section class="scope-section">
+  <h2>Scope &amp; Methodology</h2>
+  <p><strong>Scope:</strong> {{ meta.scope }}</p>
+  <p><strong>Testing window:</strong> {{ meta.engagement_dates }}</p>
+  <p><strong>Standards followed:</strong>
+     {{ methodology.standards | join(", ") if methodology.standards else "OWASP WSTG, PTES, NIST SP 800-115" }}</p>
+  <p><strong>Tools used:</strong>
+     {{ methodology.tools_used | join(", ") if methodology.tools_used else "nmap, Burp Suite, SQLMap" }}</p>
+</section>
+
+<section class="findings-table-section">
+  {% include "partials/findings_table.html.j2" %}
+</section>
+
+{% if chains %}
+<section class="chains-section">
+  {% include "partials/attack_chains.html.j2" %}
+</section>
+{% endif %}
+
+<section class="detailed-findings">
+  <h2>Detailed Findings</h2>
+  {% for f in findings %}
+    {% include "partials/finding_detail.html.j2" %}
+  {% endfor %}
+</section>
+
+<section class="roadmap-section">
+  {% include "partials/roadmap.html.j2" %}
+</section>
+
+<section class="appendix">
+  <h2>Appendix</h2>
+  <h3>Host Inventory</h3>
+  {% if hosts %}
+  <table>
+    <thead><tr><th>Host</th><th>OS</th><th>Open ports</th></tr></thead>
+    <tbody>
+    {% for ip, h in hosts.items() %}
+      <tr>
+        <td>{{ ip }}{% if h.hostnames %}<br><span class="muted">{{ h.hostnames | join(", ") }}</span>{% endif %}</td>
+        <td>{{ h.os or "—" }}</td>
+        <td>{{ h.open_ports | map(attribute='port') | join(", ") if h.open_ports else "—" }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p class="muted">No host inventory available.</p>{% endif %}
+
+  {% if warnings %}
+  <h3>Processing Notes</h3>
+  <ul>{% for w in warnings %}<li class="muted">{{ w }}</li>{% endfor %}</ul>
+  {% endif %}
+</section>
+
+</body>
+</html>
