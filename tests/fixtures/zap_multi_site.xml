@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OWASPZAPReport version="2.14.0" generated="Thu, 1 Jan 2026 00:00:00">
+  <site name="http://app1.example.com" host="app1.example.com" port="80" ssl="false">
+    <alerts>
+      <alertitem>
+        <pluginid>40012</pluginid>
+        <alertRef>40012-1</alertRef>
+        <alert>SQL Injection</alert>
+        <name>SQL Injection</name>
+        <riskcode>3</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>High (Medium)</riskdesc>
+        <desc>SQL injection vulnerability detected in login form.</desc>
+        <instances>
+          <instance>
+            <uri>http://app1.example.com/login</uri>
+            <method>POST</method>
+            <param>username</param>
+            <attack>' OR '1'='1</attack>
+            <evidence>You have an error in your SQL syntax</evidence>
+          </instance>
+        </instances>
+        <count>1</count>
+        <solution>Use parameterized queries.</solution>
+        <cweid>89</cweid>
+        <wascid>19</wascid>
+      </alertitem>
+      <alertitem>
+        <pluginid>10055</pluginid>
+        <alertRef>10055-1</alertRef>
+        <alert>CSP Header Not Set</alert>
+        <name>CSP Header Not Set</name>
+        <riskcode>2</riskcode>
+        <confidence>3</confidence>
+        <riskdesc>Medium (High)</riskdesc>
+        <desc>Content Security Policy is not set on this page.</desc>
+        <instances>
+          <instance>
+            <uri>http://app1.example.com/</uri>
+            <method>GET</method>
+          </instance>
+        </instances>
+        <count>1</count>
+        <solution>Ensure that your web server sets a Content-Security-Policy header.</solution>
+        <cweid>693</cweid>
+        <wascid>15</wascid>
+      </alertitem>
+    </alerts>
+  </site>
+  <site name="https://api.example.com" host="api.example.com" port="443" ssl="true">
+    <alerts>
+      <alertitem>
+        <pluginid>10202</pluginid>
+        <alertRef>10202-1</alertRef>
+        <alert>Absence of Anti-CSRF Tokens</alert>
+        <name>Absence of Anti-CSRF Tokens</name>
+        <riskcode>2</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>Medium (Medium)</riskdesc>
+        <desc>No CSRF tokens found in POST forms on this page.</desc>
+        <instances>
+          <instance>
+            <uri>https://api.example.com/api/update</uri>
+            <method>POST</method>
+            <param>data</param>
+          </instance>
+        </instances>
+        <count>1</count>
+        <solution>Add CSRF tokens to all forms.</solution>
+        <cweid>352</cweid>
+        <wascid>9</wascid>
+      </alertitem>
+      <alertitem>
+        <pluginid>90001</pluginid>
+        <alertRef>90001-1</alertRef>
+        <alert>Insecure JWT Algorithm</alert>
+        <name>Insecure JWT Algorithm</name>
+        <riskcode>3</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>High (Medium)</riskdesc>
+        <desc>JWT token uses weak algorithm (none/HS256 with weak key).</desc>
+        <instances>
+          <instance>
+            <uri>https://api.example.com/api/auth</uri>
+            <method>POST</method>
+          </instance>
+        </instances>
+        <count>1</count>
+        <solution>Use RS256 or ES256 with proper key management.</solution>
+        <cweid>327</cweid>
+        <wascid>4</wascid>
+      </alertitem>
+    </alerts>
+  </site>
+</OWASPZAPReport>

@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<NessusClientData_v2>
+  <Report name="ShopCart Staging" xmlns:cm="http://www.nessus.org/cm">
+    <ReportHost name="192.168.10.20">
+      <HostProperties>
+        <tag name="host-ip">192.168.10.20</tag>
+        <tag name="host-fqdn">shopcart-staging.internal</tag>
+        <tag name="operating-system">Linux Kernel 5.4</tag>
+      </HostProperties>
+      <ReportItem port="443" svc_name="https" protocol="tcp" severity="3" pluginID="20007" pluginName="SSL Version 2 and 3 Protocol Detection" pluginFamily="General">
+        <synopsis>The remote service encrypts traffic using a protocol with known weaknesses.</synopsis>
+        <description>The remote service accepts connections using SSLv3. An attacker can exploit this to conduct man-in-the-middle attacks (POODLE).</description>
+        <solution>Disable SSLv2 and SSLv3. Use TLS 1.2 or higher.</solution>
+        <plugin_output>SSLv3 is enabled on port 443.
+TLSv1.0 is enabled on port 443.
+TLSv1.1 is enabled on port 443.</plugin_output>
+        <cvss3_base_score>7.5</cvss3_base_score>
+        <cvss3_vector>CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N</cvss3_vector>
+        <cve>CVE-2014-3566</cve>
+        <see_also>https://www.openssl.org/~bodo/ssl-poodle.pdf</see_also>
+      </ReportItem>
+      <ReportItem port="21" svc_name="ftp" protocol="tcp" severity="2" pluginID="10079" pluginName="Anonymous FTP Enabled" pluginFamily="FTP">
+        <synopsis>Anonymous FTP is enabled on the remote FTP server.</synopsis>
+        <description>This FTP service allows anonymous logins. Any remote attacker can connect as anonymous and access files without credentials.</description>
+        <solution>Disable anonymous FTP access in the FTP server configuration.</solution>
+        <plugin_output>Anonymous FTP login accepted.
+230 Login successful.
+drwxr-xr-x  3 0  0  4096 Jun 01 2026 pub</plugin_output>
+        <cve>CVE-1999-0497</cve>
+        <xref>CWE:306</xref>
+      </ReportItem>
+      <ReportItem port="3306" svc_name="mysql" protocol="tcp" severity="4" pluginID="12080" pluginName="MySQL Empty Password" pluginFamily="Databases">
+        <synopsis>The remote MySQL server accepts connections without a password.</synopsis>
+        <description>The remote MySQL database server accepts connections with an empty password for the root account. An attacker can gain full database access.</description>
+        <solution>Set a strong password for all MySQL accounts.</solution>
+        <plugin_output>MySQL root account has an empty password.</plugin_output>
+        <xref>CWE:1392</xref>
+      </ReportItem>
+      <ReportItem port="0" svc_name="general" protocol="tcp" severity="0" pluginID="10267" pluginName="SSH Server Type and Version Information" pluginFamily="General">
+        <synopsis>An SSH server is listening on this port.</synopsis>
+        <description>The SSH server type and version was detected.</description>
+        <plugin_output>SSH version : SSH-2.0-OpenSSH_5.3
+SSH supported authentication : publickey,password</plugin_output>
+      </ReportItem>
+    </ReportHost>
+  </Report>
+</NessusClientData_v2>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OWASPZAPReport version="2.14.0">
+  <site name="https://target.com" host="target.com" port="443" ssl="true">
+    <alerts>
+      <alertitem>
+        <alert>Broken Finding

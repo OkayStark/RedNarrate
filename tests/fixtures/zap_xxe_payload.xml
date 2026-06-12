@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OWASPZAPReport [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<OWASPZAPReport version="2.14.0" generated="Thu, 1 Jan 2026 00:00:00">
+  <site name="http://xxe.example.com" host="xxe.example.com" port="80" ssl="false">
+    <alerts>
+      <alertitem>
+        <pluginid>40012</pluginid>
+        <alertRef>40012-1</alertRef>
+        <alert>&xxe; SQL Injection</alert>
+        <name>&xxe;</name>
+        <riskcode>3</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>High (Medium)</riskdesc>
+        <desc>SQL Injection &xxe;</desc>
+        <instances>
+          <instance>
+            <uri>http://xxe.example.com/page?id=1</uri>
+            <method>GET</method>
+            <param>id</param>
+            <attack>&xxe;</attack>
+            <evidence>&xxe;</evidence>
+          </instance>
+        </instances>
+        <count>1</count>
+        <solution>Use parameterized queries.</solution>
+        <cweid>89</cweid>
+        <wascid>19</wascid>
+      </alertitem>
+    </alerts>
+  </site>
+</OWASPZAPReport>

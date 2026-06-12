@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<NessusClientData_v2>
+  <Report name="Truncated">
+    <ReportHost name="10.0.0.1">
+      <ReportItem port="80" svc_name="http" protocol="tcp" severity="2" pluginID="99999" pluginName="Test">

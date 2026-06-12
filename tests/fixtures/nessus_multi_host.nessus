@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NessusClientData_v2>
+  <Report name="MultiHostScan">
+    <ReportHost name="10.0.0.1">
+      <ReportItem port="22" svc_name="ssh" protocol="tcp" severity="2" pluginID="10881"
+                  pluginName="SSH Protocol Version 1 Detection" pluginFamily="General">
+        <description>The remote SSH server supports SSH protocol version 1.</description>
+        <plugin_output>SSH version: SSH-1.99-OpenSSH_7.4</plugin_output>
+        <xref>CWE:310</xref>
+      </ReportItem>
+      <ReportItem port="80" svc_name="www" protocol="tcp" severity="3" pluginID="11213"
+                  pluginName="SQL Injection" pluginFamily="Web Servers">
+        <description>SQL injection was detected in the web application.</description>
+        <plugin_output>Vulnerable parameter: id</plugin_output>
+        <xref>CWE-89</xref>
+        <cve>CVE-2023-12345</cve>
+      </ReportItem>
+    </ReportHost>
+    <ReportHost name="10.0.0.2">
+      <ReportItem port="443" svc_name="https" protocol="tcp" severity="4" pluginID="12345"
+                  pluginName="Remote Code Execution via Command Injection" pluginFamily="Web Servers">
+        <description>Remote code execution is possible via command injection.</description>
+        <plugin_output>Payload response indicates command execution.</plugin_output>
+        <xref>CWE:78</xref>
+        <cve>CVE-2024-99001</cve>
+      </ReportItem>
+      <ReportItem port="0" svc_name="general" protocol="tcp" severity="0" pluginID="19506"
+                  pluginName="Nessus Scan Information" pluginFamily="Settings">
+        <description>Nessus scan information.</description>
+      </ReportItem>
+    </ReportHost>
+    <ReportHost name="10.0.0.3">
+      <ReportItem port="3306" svc_name="mysql" protocol="tcp" severity="1" pluginID="20800"
+                  pluginName="Open Port Detection" pluginFamily="Port scanners">
+        <description>A MySQL service is running on this port.</description>
+      </ReportItem>
+    </ReportHost>
+  </Report>
+</NessusClientData_v2>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE NessusClientData_v2 [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<NessusClientData_v2>
+  <Report name="XXETest">
+    <ReportHost name="192.168.1.1">
+      <ReportItem port="80" svc_name="www" protocol="tcp" severity="3" pluginID="99999"
+                  pluginName="&xxe; SQLi Test" pluginFamily="Web Servers">
+        <description>Injected: &xxe;</description>
+      </ReportItem>
+    </ReportHost>
+  </Report>
+</NessusClientData_v2>

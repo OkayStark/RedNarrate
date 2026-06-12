@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OWASPZAPReport version="2.14.0" generated="Thu, 12 Jun 2026 10:00:00">
+  <site name="https://target.com" host="target.com" port="443" ssl="true">
+    <alerts>
+      <alertitem>
+        <pluginid>40012</pluginid>
+        <alert>Cross Site Scripting (Reflected)</alert>
+        <name>Cross Site Scripting (Reflected)</name>
+        <riskcode>3</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>High (Medium)</riskdesc>
+        <desc>Cross-site Scripting (XSS) — Reflected attacks are those where the injected script is reflected off the web server.</desc>
+        <instances>
+          <instance>
+            <uri>https://target.com/search</uri>
+            <method>GET</method>
+            <param>q</param>
+            <attack>&lt;script&gt;alert(1)&lt;/script&gt;</attack>
+            <evidence>&lt;script&gt;alert(1)&lt;/script&gt;</evidence>
+          </instance>
+        </instances>
+        <solution>Phase: Architecture and Design. Use a vetted library or framework that does not allow this weakness.</solution>
+        <reference>https://cwe.mitre.org/data/definitions/79.html</reference>
+        <cweid>79</cweid>
+        <wascid>8</wascid>
+        <sourceid>3</sourceid>
+        <otherinfo></otherinfo>
+      </alertitem>
+      <alertitem>
+        <pluginid>10202</pluginid>
+        <alert>Absence of Anti-CSRF Tokens</alert>
+        <name>Absence of Anti-CSRF Tokens</name>
+        <riskcode>2</riskcode>
+        <confidence>2</confidence>
+        <riskdesc>Medium (Medium)</riskdesc>
+        <desc>No Anti-CSRF tokens were found in an HTML submission form. A cross-site request forgery attack could be used.</desc>
+        <instances>
+          <instance>
+            <uri>https://target.com/transfer</uri>
+            <method>POST</method>
+            <param></param>
+            <evidence>&lt;form action="/transfer" method="POST"&gt;</evidence>
+          </instance>
+        </instances>
+        <solution>Phase: Architecture and Design. Use a vetted library that provides a CSRF token per form.</solution>
+        <cweid>352</cweid>
+        <wascid>9</wascid>
+      </alertitem>
+      <alertitem>
+        <pluginid>10038</pluginid>
+        <alert>Content Security Policy (CSP) Header Not Set</alert>
+        <name>Content Security Policy (CSP) Header Not Set</name>
+        <riskcode>2</riskcode>
+        <confidence>3</confidence>
+        <riskdesc>Medium (High)</riskdesc>
+        <desc>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS).</desc>
+        <instances>
+          <instance>
+            <uri>https://target.com/</uri>
+            <method>GET</method>
+          </instance>
+          <instance>
+            <uri>https://target.com/login</uri>
+            <method>GET</method>
+          </instance>
+        </instances>
+        <solution>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</solution>
+        <cweid>693</cweid>
+        <wascid>15</wascid>
+      </alertitem>
+      <alertitem>
+        <pluginid>90033</pluginid>
+        <alert>Loosely Scoped Cookie</alert>
+        <name>Loosely Scoped Cookie</name>
+        <riskcode>0</riskcode>
+        <confidence>1</confidence>
+        <riskdesc>Informational (Low)</riskdesc>
+        <desc>Cookies can be scoped by domain or path. Cookies that are scoped to a parent domain may be accessible by the parent domain and all subdomains.</desc>
+        <instances>
+          <instance>
+            <uri>https://target.com/login</uri>
+            <method>POST</method>
+            <evidence>session=abc123; domain=.target.com</evidence>
+          </instance>
+        </instances>
+        <solution>Always scope cookies to the most restrictive domain and path possible.</solution>
+        <cweid>565</cweid>
+        <wascid>15</wascid>
+      </alertitem>
+    </alerts>
+  </site>
+</OWASPZAPReport>
