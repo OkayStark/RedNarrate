@@ -1,0 +1,80 @@
+{
+  "target_url": "http://wordpress.example.com/",
+  "target_ip": "10.0.0.5",
+  "effective_url": "http://wordpress.example.com/",
+  "interesting_findings": [],
+  "version": {
+    "number": "5.9.0",
+    "release_date": "2022-01-25",
+    "status": "insecure",
+    "vulnerabilities": [
+      {
+        "title": "WordPress 5.9.0 - Stored XSS via wp-mail.php",
+        "fixed_in": "5.9.2",
+        "references": {
+          "cve": ["2022-21661"],
+          "url": ["https://wpscan.com/vulnerability/12345"]
+        }
+      }
+    ]
+  },
+  "plugins": {
+    "woocommerce": {
+      "slug": "woocommerce",
+      "version": {"number": "7.0.0"},
+      "vulnerabilities": [
+        {
+          "title": "WooCommerce 7.0 - SQL Injection via order_by parameter",
+          "fixed_in": "7.0.1",
+          "references": {
+            "cve": ["2023-23752"],
+            "url": ["https://wpscan.com/vulnerability/11111"]
+          }
+        }
+      ]
+    },
+    "elementor": {
+      "slug": "elementor",
+      "version": {"number": "3.12.0"},
+      "vulnerabilities": [
+        {
+          "title": "Elementor 3.12 - Stored XSS via widget title",
+          "fixed_in": "3.12.1",
+          "references": {
+            "cve": ["2023-32243"],
+            "url": ["https://wpscan.com/vulnerability/22222"]
+          }
+        }
+      ]
+    },
+    "akismet": {
+      "slug": "akismet",
+      "version": {"number": "5.0.0"},
+      "vulnerabilities": []
+    },
+    "yoast-seo": {
+      "slug": "yoast-seo",
+      "version": {"number": "20.0.0"},
+      "vulnerabilities": [
+        {
+          "title": "Yoast SEO 20.0 - Information Disclosure via REST API",
+          "fixed_in": "20.1",
+          "references": {
+            "cve": ["2023-40000"],
+            "url": ["https://wpscan.com/vulnerability/33333"]
+          }
+        }
+      ]
+    }
+  },
+  "themes": {
+    "twentytwentyone": {
+      "slug": "twentytwentyone",
+      "version": {"number": "1.9"},
+      "vulnerabilities": []
+    }
+  },
+  "users": {"alice": {"id": 1, "login": "alice"}},
+  "scan_started": "2024-01-01 12:00:00 UTC",
+  "scan_finished": "2024-01-01 12:02:00 UTC"
+}

@@ -1,0 +1,5 @@
+not-json-at-all
+{"template-id": "valid-but-minimal", "info": {"name": "Test", "severity": "info"}, "matched-at": "http://target.com/"}
+{broken json here
+null
+{"template-id": "sqli-error-based", "info": {"name": "SQL Injection", "severity": "critical", "tags": ["sqli"], "classification": {"cwe-id": ["CWE-89"]}}, "matched-at": "http://target.com/login?id=1", "host": "target.com", "ip": "1.2.3.4", "request": "GET /login?id=1 HTTP/1.1\r\nHost: target.com", "response": "You have an error in your SQL syntax"}

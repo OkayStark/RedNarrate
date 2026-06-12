@@ -1,0 +1,58 @@
+{
+  "commandline": "ffuf -u https://target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt -of json -o ffuf_sample.json -mc 200,301,302,401,403",
+  "time": "2026-06-12T10:05:00Z",
+  "results": [
+    {
+      "input": {"FUZZ": "admin"},
+      "position": 1,
+      "status": 200,
+      "length": 4521,
+      "words": 120,
+      "lines": 45,
+      "content-type": "text/html; charset=utf-8",
+      "redirectlocation": "",
+      "url": "https://target.com/admin",
+      "duration": 123456789
+    },
+    {
+      "input": {"FUZZ": "backup.sql"},
+      "position": 2,
+      "status": 200,
+      "length": 98304,
+      "words": 0,
+      "lines": 0,
+      "content-type": "application/octet-stream",
+      "redirectlocation": "",
+      "url": "https://target.com/backup.sql",
+      "duration": 234567890
+    },
+    {
+      "input": {"FUZZ": "api"},
+      "position": 3,
+      "status": 301,
+      "length": 0,
+      "words": 0,
+      "lines": 0,
+      "content-type": "",
+      "redirectlocation": "https://target.com/api/v1/",
+      "url": "https://target.com/api",
+      "duration": 45678901
+    },
+    {
+      "input": {"FUZZ": "login"},
+      "position": 4,
+      "status": 200,
+      "length": 3200,
+      "words": 90,
+      "lines": 38,
+      "content-type": "text/html",
+      "redirectlocation": "",
+      "url": "https://target.com/login",
+      "duration": 56789012
+    }
+  ],
+  "config": {
+    "url": "https://target.com/FUZZ",
+    "wordlist": [{"alias": "FUZZ", "keyword": "FUZZ", "path": "/usr/share/wordlists/dirb/common.txt"}]
+  }
+}

@@ -1,0 +1,8 @@
+/.env                 (Status: 200) [Size: 512]
+/admin                (Status: 200) [Size: 4521]
+/wp-admin             (Status: 301) [Size: 0]
+/backup.zip           (Status: 200) [Size: 204800]
+/api                  (Status: 301) [Size: 0]
+/login                (Status: 200) [Size: 3200]
+/images               (Status: 301) [Size: 0]
+/uploads              (Status: 200) [Size: 1024]

@@ -1,0 +1,90 @@
+{
+  "banner": {"description": "WordPress Security Scanner", "version": "3.8.25"},
+  "start_time": 1749686400,
+  "target_url": "https://target.com/",
+  "target_ip": "10.0.0.5",
+  "effective_url": "https://target.com/",
+  "interesting_findings": [
+    {
+      "url": "https://target.com/readme.html",
+      "to_s": "WordPress readme found: https://target.com/readme.html",
+      "type": "readme",
+      "found_by": "Direct Access (Aggressive Detection)",
+      "confidence": 100,
+      "interesting_entries": ["WordPress version 6.4.2 mentioned"],
+      "references": {"url": ["https://codex.wordpress.org/Hardening_WordPress"]}
+    },
+    {
+      "url": "https://target.com/xmlrpc.php",
+      "to_s": "XML-RPC seems to be enabled: https://target.com/xmlrpc.php",
+      "type": "xmlrpc",
+      "found_by": "Direct Access (Aggressive Detection)",
+      "confidence": 100,
+      "interesting_entries": [],
+      "references": {"url": ["http://codex.wordpress.org/XML-RPC_Pingback_API"]}
+    }
+  ],
+  "wordpress_version": {
+    "number": "6.4.2",
+    "release_date": "2024-01-30",
+    "status": "insecure",
+    "found_by": "Rss Generator (Passive Detection)",
+    "interesting_entries": ["https://target.com/feed/, Match: 'WordPress 6.4.2'"],
+    "vulnerabilities": [
+      {
+        "title": "WordPress 6.4-6.4.2 — Remote Code Execution via PHP Object Injection",
+        "fixed_in": "6.4.3",
+        "references": {
+          "cve": ["2024-6387"],
+          "url": ["https://wpscan.com/vulnerability/example"]
+        }
+      }
+    ]
+  },
+  "plugins": {
+    "contact-form-7": {
+      "slug": "contact-form-7",
+      "location": "https://target.com/wp-content/plugins/contact-form-7/",
+      "latest_version": "5.9",
+      "last_updated": "2023-08-01T00:00:00.000Z",
+      "outdated": true,
+      "version": {
+        "number": "5.7",
+        "confidence": 80,
+        "found_by": "Readme - Stable Tag (Aggressive Detection)"
+      },
+      "vulnerabilities": [
+        {
+          "title": "Contact Form 7 < 5.9 — Reflected XSS via Form Attribute",
+          "fixed_in": "5.9",
+          "references": {
+            "cve": ["2024-2242"],
+            "url": ["https://wpscan.com/vulnerability/cf7-xss"]
+          }
+        }
+      ],
+      "found_by": "Urls In Homepage (Passive Detection)",
+      "confidence": 100
+    }
+  },
+  "themes": {
+    "twentytwentyone": {
+      "slug": "twentytwentyone",
+      "location": "https://target.com/wp-content/themes/twentytwentyone/",
+      "version": {"number": "1.9", "confidence": 80, "found_by": "Style Readme"},
+      "vulnerabilities": []
+    }
+  },
+  "users": {
+    "admin": {
+      "username": "admin",
+      "found_by": "Author Posts - Display Name (Passive Detection)",
+      "confidence": 90
+    },
+    "editor": {
+      "username": "editor",
+      "found_by": "Author Id Brute Forcing (Aggressive Detection)",
+      "confidence": 80
+    }
+  }
+}
